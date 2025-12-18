@@ -53,8 +53,33 @@ class HashMap {
             return null;
         }
     }
+
+    has(key) {
+        let hashCode = this.hash(key);
+        if (hashCode < 0 || hashCode >= this.#capacity - 1) {
+            throw new Error("Trying to access index out of bounds");
+        } else if (this.#buckets[hashCode]) {
+            return this.#buckets[hashCode].containsKey(key);
+        } else {
+            return false;
+        }
+    }
+
+    remove(key) { 
+        let hashCode = this.hash(key);
+        if (hashCode < 0 || hashCode >= this.#capacity - 1) {
+            throw new Error("Trying to access index out of bounds");
+        } else if (this.#buckets[hashCode] && this.#buckets[hashCode].containsKey(key)) {
+            this.#buckets[hashCode].removeNode(this.#buckets[hashCode].findByKey(key));
+        }
+    }
 }
 
 let hashMap = new HashMap();
 hashMap.set("ali", 4);
-
+console.log("get ali's value: " + hashMap.get("ali"));
+console.log("ali exist? " + hashMap.has("ali"));
+console.log("alice exist? " + hashMap.has("alice"));
+hashMap.remove("ali");
+console.log("removed ali");
+console.log("ali exist? " + hashMap.has("ali"));

@@ -163,7 +163,17 @@ const LinkedList = () => {
         frontNode.setPrevNode(behindNode);
     }
 
-    return {append, prepend, size, getHead, getTail, at, pop, containsValue, containsKey, findByValue, findByKey, toString, insertAt, removeAt};
+    const removeNode = (nodeToRemove) => {
+        let behindNode = nodeToRemove.getPrevNode();
+        let frontNode = nodeToRemove.getNextNode();
+        if (nodeToRemove === null)
+            throw "couldn't find the index";
+
+        behindNode.setNextNode(frontNode);
+        frontNode.setPrevNode(behindNode);
+    }
+
+    return {append, prepend, size, getHead, getTail, at, pop, containsValue, containsKey, findByValue, findByKey, toString, insertAt, removeAt, removeNode};
 }
 
 const Node = () => {
