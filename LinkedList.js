@@ -130,6 +130,28 @@ const LinkedList = () => {
         return null;
     }
 
+    const getAllKeys = () => {
+        let arr = [];
+        let counter = size();
+        let node = head.getNextNode();
+        for (let i = 0; i < counter; i++) {
+            arr.push(node.getKey());
+            node = node.getNextNode();
+        }
+        return arr;
+    }
+
+    const getAllValues = () => {
+        let arr = [];
+        let counter = size();
+        let node = head.getNextNode();
+        for (let i = 0; i < counter; i++) {
+            arr.push(node.getValue());
+            node = node.getNextNode();
+        }
+        return arr;
+    }
+
     const toString = () => {
         let counter = size();
         let node = head.getNextNode();
@@ -173,7 +195,7 @@ const LinkedList = () => {
         frontNode.setPrevNode(behindNode);
     }
 
-    return {append, prepend, size, getHead, getTail, at, pop, containsValue, containsKey, findByValue, findByKey, toString, insertAt, removeAt, removeNode};
+    return {append, prepend, size, getHead, getTail, at, pop, containsValue, containsKey, findByValue, findByKey, toString, insertAt, removeAt, removeNode, getAllKeys, getAllValues};
 }
 
 const Node = () => {
