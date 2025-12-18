@@ -39,8 +39,20 @@ class HashMap {
             this.#buckets[hashCode].toString();
             this.#occupied++;
         }
-        
-    }    
+
+        //grow your bucket
+    }   
+
+    get(key) {
+        let hashCode = this.hash(key);
+        if (hashCode < 0 || hashCode >= this.#capacity - 1) {
+            throw new Error("Trying to access index out of bounds");
+        } else if (this.#buckets[hashCode] && this.#buckets[hashCode].containsKey(key)) {
+            return this.#buckets[hashCode].findByKey(key).getValue();
+        } else {
+            return null;
+        }
+    }
 }
 
 let hashMap = new HashMap();
